@@ -23,6 +23,7 @@ sub makeRequest {
     say "GET #$iter successful.";
   }
   else {
-    die "GET #$iter failed.";
+    die "GET #$iter failed: " . $r->status_line;
   }
 }
+
