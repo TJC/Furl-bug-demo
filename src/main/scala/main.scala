@@ -5,7 +5,6 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
-import scala.io.StdIn // for the press-enter-to-exit thing.
 
 object WebServer extends Directives {
   def main(args: Array[String]) {
@@ -31,10 +30,7 @@ object WebServer extends Directives {
 
       val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8080)
 
-      println(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
-      StdIn.readLine() // let it run until user presses return
-      bindingFuture
-        .flatMap(_.unbind()) // trigger unbinding from the port
-        .onComplete(_ => system.terminate()) // and shutdown when done
+      println("Server online at http://localhost:8080/")
+      println("Hit Ctrl-C to exit")
   }
 }
